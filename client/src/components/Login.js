@@ -6,13 +6,11 @@ export default function Login(props) {
   const passwordRef = useRef();
 
   const submit = () => {
-    debugger
     axios.post('http://localhost:5000/api/login', {
       username: usernameRef.current.value,
       password: passwordRef.current.value,
     })
       .then(response => {
-        console.log(response)
         localStorage.setItem('token', response.data.payload)
         props.history.push('/bubbles');
       })
