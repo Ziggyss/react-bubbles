@@ -10,7 +10,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -21,24 +20,28 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
-
+    axiosWithAuth()
+      .put(`${colorsApi}${colorToEdit.id}`, colorToEdit)
+      .then(response => {
+        updateColors([...colors, response.data]);
+        setEditing(false);
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
 
   const deleteColor = color => {
     axiosWithAuth()
-    .delete(`${colorsApi}${color.id}`)
-    .then(response => {
-      updateColors(colors.filter(item => 
-        item.id !== color.id
-      ));
-    })
-    .catch(error => {
-      console.log('delete color error')
-    })
+      .delete(`${colorsApi}${color.id}`)
+      .then(response => {
+        updateColors(colors.filter(item => item.id !== color.id));
+      })
+      .catch(error => {
+        alert("delete color error");
+      });
   };
+
 
   return (
     <div className="colors-wrap">
