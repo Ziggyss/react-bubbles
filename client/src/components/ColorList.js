@@ -42,6 +42,14 @@ const ColorList = ({ colors, updateColors }) => {
       });
   };
 
+  // const addColor = () => {
+  //   axiosWithAuth()
+  //   .post(`${colorsApi}`, {
+  //     color: "",
+  //     code: ""
+
+  //   })
+  // }
 
   return (
     <div className="colors-wrap">
@@ -94,6 +102,7 @@ const ColorList = ({ colors, updateColors }) => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+      {/* //It must be possible to re-use the same form? */}
     </div>
   );
 };
