@@ -30,10 +30,19 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Explain what a token is used for.
 
+A token is used for authentication so that a user can login and then gain access to protected routes on a website.
 
 - [ ] What steps can you take in your web apps to keep your data secure?
+
+You can set up private routes, develop a secure method of authentication and use  HTTPS.
+
 - [ ] Describe how web servers work.
+
+Web servers can refer to hardware or software. With hardware, the web server is a computer that stores web server software and a website’s files. It connects to the internet and allows data interchange with other connected devices. With software a web server can be accessed through domain names of websites it stores and it understands and works with URLs and HTTP to deliver content to the user.
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+CRUD - GET, POST, PUT and DELETE
 
 
 ## Project Set Up
