@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import axiosWithAuth from "../axios/axios";
+
+const colorsApi = "http://localhost:5000/api/colors/";
 
 const initialColor = {
   color: "",
@@ -7,7 +10,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -18,14 +20,36 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    axiosWithAuth()
+      .put(`${colorsApi}${colorToEdit.id}`, colorToEdit)
+      .then(response => {
+        updateColors([...colors, response.data]);
+        setEditing(false);
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`${colorsApi}${color.id}`)
+      .then(response => {
+        updateColors(colors.filter(item => item.id !== color.id));
+      })
+      .catch(error => {
+        alert("delete color error");
+      });
   };
+
+  // const addColor = () => {
+  //   axiosWithAuth()
+  //   .post(`${colorsApi}`, {
+  //     color: "",
+  //     code: ""
+
+  //   })
+  // }
 
   return (
     <div className="colors-wrap">
@@ -78,6 +102,7 @@ const ColorList = ({ colors, updateColors }) => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+      {/* //It must be possible to re-use the same form? */}
     </div>
   );
 };
